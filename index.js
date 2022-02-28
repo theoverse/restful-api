@@ -115,13 +115,28 @@ app.patch('/api/products/:id', (req, res) => {
         ...products[index],
         ...req.body
     }
-    products[index] = updateProduct
+    products[index] = updateProduct;
 
     return res.json(updateProduct);
 })
 
 
 // delete a specific product data
+app.delete('/api/products/:id', (req, res) => {
+    const product = products.find(prod => prod.id === req.params.id);
+    if (!product) {
+        return res.status(404).json({
+            message: 'Product is not found with this id'
+        });
+    }
+
+    const index = products.findIndex(prod => prod.id === req.params.id);
+    products.splice(index, 1);
+    return res.json(product);
+})
+
+
+
 // delete all products data
 
 function validation(body) {
@@ -134,5 +149,5 @@ function validation(body) {
 }
 
 app.listen(port, () => {
-    console.log(`Server is listening at http://${hostname}:${port}/`)
+    console.log(`Server is listening at http://${hostname}:${port}/`);
 })
