@@ -7,7 +7,7 @@ const { v4: uuidv4 } = require('uuid');
 uuidv4();
 
 let hostname = '127.0.0.1';
-let port = 3000;
+let port = process.env.PORT;
 
 const products = [
     {
@@ -149,6 +149,10 @@ function validation(body) {
     })
 
     return schema.validate(body);
+}
+
+if (port == null || port == "") {
+    port = 3000
 }
 
 app.listen(port, () => {
