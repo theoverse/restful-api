@@ -135,9 +135,12 @@ app.delete('/api/products/:id', (req, res) => {
     return res.json(product);
 })
 
-
-
 // delete all products data
+app.delete('/api/products', (req, res) => {
+    products.splice(0)
+    return res.json(products)
+})
+
 
 function validation(body) {
     const schema = Joi.object({
