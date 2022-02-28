@@ -35,10 +35,23 @@ const products = [
 
 // show list of products
 app.get('/api/products', (req, res) => {
-    res.json(products)
+    res.json(products);
 })
 
-// show specific products
+// show specific product
+app.get('/api/products/:id', (req, res) => {
+    const { id } = req.params;
+    // res.send(req.params.id);
+    const product = products.find(prod => prod.id === id);
+
+    if (!product) {
+        return res.status(404).json({
+            error: 'No Product Found with this ID'
+        })
+    }
+    return res.json(product);
+})
+
 // insert a product data
 // update specific producy data (using PUT method)
 // update specific product data (using patch method)
