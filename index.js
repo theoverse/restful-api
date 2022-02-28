@@ -1,14 +1,17 @@
 
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 
-let hostname = '127.0.0.1'
-let port = 3000
+const { v4: uuidv4 } = require('uuid');
+uuidv4();
+
+let hostname = '127.0.0.1';
+let port = 3000;
 
 app.get('/', (req, res) => {
-    console.log(`Server is listening at ${hostname} on port ${port}.`)
+    console.log(`Server is listening at ${hostname} on port ${port}.`);
 
-    res.send('Welcome banner')
+    res.send('Welcome banner');
 })
 
 app.listen(port, () => {
@@ -53,6 +56,20 @@ app.get('/api/products/:id', (req, res) => {
 })
 
 // insert a product data
+app.use(express.json());
+app.post('/api/products', (req, res) => {
+
+    const product = {
+        id: uuidv4(),
+        name: req.body.name,
+        price: req.body.price
+    }
+    products.push(product)
+
+    return res.json(product)
+})
+
+
 // update specific producy data (using PUT method)
 // update specific product data (using patch method)
 // delete a specific product data
