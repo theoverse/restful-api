@@ -30,7 +30,7 @@ const products = [
 app.get('/', (req, res) => {
     console.log(`Server is listening at ${hostname} on port ${port}.`);
 
-    res.send('Welcome banner');
+    res.send('Welcome Banner: You can use a Browser, Postman, or any alternative to test my end-points');
 })
 
 // show list of products
